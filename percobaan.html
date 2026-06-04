@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f2fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.5s ease;
+        }
+
+        .img-pocoyo {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Animasi biar Pocoyo-nya gerak-gerak lucu */
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        h2 {
+            color: #0369a1;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-yes {
+            background-color: #22c55e;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background-color: #16a34a;
+            transform: scale(1.1);
+        }
+
+        .btn-no {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-no:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="pocoyo-img" class="img-pocoyo bounce" src="https://static.wikia.nocookie.net/pocoyoworld/images/4/47/Pocoyo_2026.png/revision/latest?cb=20260216152922" alt="Pocoyo">
+        <h2 id="text-bubble">I love you! <br><br> Did u love me?</h2>
+        
+        <div class="btn-container" id="buttons">
+            <button class="btn-yes" onclick="pilihYes()">YES</button>
+            <button class="btn-no" onclick="pilihNo()">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const img = document.getElementById('pocoyo-img');
+        const text = document.getElementById('text-bubble');
+        const btnContainer = document.getElementById('buttons');
+        
+        let clickNoCount = 0;
+
+        function pilihYes() {
+            // State: YES
+            img.src = "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyN2p5ZXdlNDV1NmpuejE4N3Z3ZGY2OWdjbDVjbTUzemZiamFuZmZyayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/En1t8BaNgLoahsQ017/giphy.gif"; // Gambar Pocoyo Senang
+            img.className = "img-pocoyo bounce";
+            text.innerHTML = "Sayang adek banya banya 🥰❤️";
+            btnContainer.style.display = "none"; 
+        }
+
+        function pilihNo() {
+            clickNoCount++;
+
+            if (clickNoCount === 1) {
+                // State: NO Pertama Kali -> "Beneran?"
+                img.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7dfc29c1-3e2b-4d89-bd31-e7a53e41fb08/dfyzgbn-a8e16908-95f8-419d-ada2-f23afebcd5e8.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi83ZGZjMjljMS0zZTJiLTRkODktYmQzMS1lN2E1M2U0MWZiMDgvZGZ5emdibi1hOGUxNjkwOC05NWY4LTQxOWQtYWRhMi1mMjNhZmViY2Q1ZTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.g3ZAupOyfRdJo1RpwccRzZl1sp58FbMi8wbhBDOjFRY"; // Gambar Pocoyo Bingung
+                img.className = "img-pocoyo shake";
+                text.innerHTML = "Beneran?? 🥺";
+                
+            } else if (clickNoCount >= 2) {
+                // State: NO Kedua Kali -> "Apalah..." (Pocoyo Sedih)
+                img.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7dfc29c1-3e2b-4d89-bd31-e7a53e41fb08/dfavc5j-00201586-20e6-4bbc-9430-2df9481cda35.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi83ZGZjMjljMS0zZTJiLTRkODktYmQzMS1lN2E1M2U0MWZiMDgvZGZhdmM1ai0wMDIwMTU4Ni02MGU2LTRiYmMtOTQzMC0yZGY5NDgxY2RhMzUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tyuYio5HbOCnuYqefL5BTYpeAafvNlsQzMLeq6coQ0U"; // Gambar Pocoyo Sedih
+                img.className = "img-pocoyo"; // Diam kecewa
+                text.innerHTML = "Apalah... 😞💔";
+                btnContainer.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
